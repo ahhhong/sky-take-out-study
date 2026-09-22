@@ -92,10 +92,12 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @see com.sky.service.EmployeeService#pageQuery(com.sky.dto.EmployeePageQueryDTO)
      */
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
-        //分页查
+        //分页查 利用工具pegehelper
         PageHelper.startPage(employeePageQueryDTO.getPage(),employeePageQueryDTO.getPageSize());
         Page<Employee> page=employeeMapper.pageQuery(employeePageQueryDTO);
+        //员工总数
         long total = page.getTotal();
+        //查询的结果
         List<Employee> result = page.getResult();
         return new PageResult(total,result);
     }
@@ -112,6 +114,25 @@ public class EmployeeServiceImpl implements EmployeeService {
             .id(id)
             .status(status)
             .build();
+        employeeMapper.update(employee);
+    }
+
+    /**    (non-Javadoc)
+     * 根据id查询
+     * @see com.sky.service.EmployeeService#findById(java.lang.Long)
+     */
+    public Employee findById(Long id) {
+        Employee employee=employeeMapper.findById(id);
+        return employee;
+    }
+
+    /**    (non-Javadoc)
+     * 编辑员工信息
+     * @see com.sky.service.EmployeeService#update(com.sky.dto.EmployeeDTO)
+     */
+    public void update(EmployeeDTO employeeDTO) {
+        Employee employee=new Employee();
+        BeanUtils.copyProperties(employeeDTO, employee);
         employeeMapper.update(employee);
     }
 
