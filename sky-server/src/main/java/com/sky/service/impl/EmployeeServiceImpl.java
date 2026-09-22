@@ -87,7 +87,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMapper.Insert(employee);
     }
 
-    @Override
+    /**    (non-Javadoc)
+     * 分页查询
+     * @see com.sky.service.EmployeeService#pageQuery(com.sky.dto.EmployeePageQueryDTO)
+     */
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
         //分页查
         PageHelper.startPage(employeePageQueryDTO.getPage(),employeePageQueryDTO.getPageSize());
@@ -96,4 +99,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> result = page.getResult();
         return new PageResult(total,result);
     }
+
+    /**    (non-Javadoc)
+     * 员工账号启用和禁止
+     * @see com.sky.service.EmployeeService#startOrStop(java.lang.Integer, java.lang.Long)
+     */
+    public void startOrStop(Integer status, Long id) {
+        // Employee employee = new Employee();
+        // employee.setId(id);
+        // employee.setStatus(status);
+        Employee employee = Employee.builder()
+            .id(id)
+            .status(status)
+            .build();
+        employeeMapper.update(employee);
+    }
+
+    
 }
