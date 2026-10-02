@@ -2,11 +2,10 @@ package com.sky.config;
 
 import com.sky.interceptor.JwtTokenAdminInterceptor;
 import com.sky.json.JacksonObjectMapper;
-
+import com.sky.properties.LocalOssProperties;
 import lombok.extern.slf4j.Slf4j;
-
+import java.nio.file.Paths;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +31,8 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
     @Autowired
     private JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
+    @Autowired
+    private LocalOssProperties localOssProperties;
 
     /**
      * 注册自定义拦截器
@@ -74,6 +75,18 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         log.info("开始设置静态资源映射...");
         registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        String dir = Paths.get(localOssProperties.getUplocalDir())
+            .toAbsolutePath()
+            .normalize()
+            .toUri()
+            .toString();
+
+        if (!dir.endsWith("/")) {
+            dir = dir + "/";
+        }
+
+        registry.addResourceHandler(localOssProperties.getUrlPath() + "/**")
+            .addResourceLocations(dir);
     }
 
 
