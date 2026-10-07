@@ -91,6 +91,7 @@ public class DishServiceImpl implements DishService{
         }*/
 
         dishMapper.deleteByIds(ids);
+        dishFlavorMapper.deleteByDishIds(ids);
     }
 
 }
