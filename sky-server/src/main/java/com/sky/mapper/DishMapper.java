@@ -1,5 +1,6 @@
 package com.sky.mapper;
 
+import com.sky.result.Result;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -58,4 +59,19 @@ public interface DishMapper {
      * @param ids
      */
     void deleteByIds(List<Long> ids);
+
+    /**
+     * 根据分类id查询菜品
+     * @param id
+     * @return
+     */
+    @Select("select * from dish where category_id=#{id}")
+    List<DishVO> list(Long id);
+
+    /**
+     * 修改菜品
+     * @param dish
+     */
+    @AutoFill(value = OperationType.UPDATE)
+    void update(Dish dish);
 }

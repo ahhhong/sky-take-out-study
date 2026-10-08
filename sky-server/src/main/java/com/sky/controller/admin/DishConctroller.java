@@ -1,6 +1,9 @@
 package com.sky.controller.admin;
 
-import org.springframework.web.bind.annotation.RestController;
+import com.sky.entity.Dish;
+import com.sky.mapper.DishMapper;
+import com.sky.vo.DishVO;
+import org.springframework.web.bind.annotation.*;
 
 import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
@@ -16,12 +19,6 @@ import java.util.List;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController 
@@ -69,6 +66,27 @@ public class DishConctroller {
     public Result delete(@RequestParam  List<Long> ids){
         log.info("菜品批量删除");
         dishService.deleteBatch(ids);
+        return Result.success();
+    }
+
+    @GetMapping ("/{id}")
+    @ApiOperation("根据id查询菜品")
+    public Result<DishVO> getId(@PathVariable Long id){
+        DishVO dishVO = dishService.getById(id);
+        return Result.success(dishVO);
+    }
+
+    @GetMapping("/list")
+    @ApiOperation("根据分类id查询菜品")
+    public Result<List<DishVO>> list(Long id){
+        return Result.success(dishService.list(id));
+    }
+
+    @PutMapping
+    @ApiOperation("修改菜品")
+    public Result update(@RequestBody DishDTO dishDTO){
+        log.info("修改菜品:{}",dishDTO);
+        dishService.updateWithFlavor(dishDTO);
         return Result.success();
     }
 }
