@@ -14,3 +14,7 @@ sky:
   local:
     uplocal-dir: D:/1a/sky-take-out-study/upload
     url-path: /upload
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456

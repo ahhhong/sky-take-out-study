@@ -2,6 +2,7 @@ package com.sky.controller.admin;
 
 import com.sky.utils.AliOssUtil;
 import com.sky.utils.LocalOssUtil;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @RestController 
 @RequestMapping ("/admin/common")
+@Api(tags ="通用接口")
 @Slf4j 
 public class CommonController {
 

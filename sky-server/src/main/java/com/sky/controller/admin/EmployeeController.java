@@ -12,6 +12,7 @@ import com.sky.service.EmployeeService;
 import com.sky.service.impl.EmployeeServiceImpl;
 import com.sky.utils.JwtUtil;
 import com.sky.vo.EmployeeLoginVO;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.PutMapping;
  */
 @RestController
 @RequestMapping("/admin/employee")
+@Api(tags ="员工管理接口")
 @Slf4j
 public class EmployeeController {
 
