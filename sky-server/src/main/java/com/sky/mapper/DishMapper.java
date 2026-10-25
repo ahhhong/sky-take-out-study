@@ -65,8 +65,7 @@ public interface DishMapper {
      * @param id
      * @return
      */
-    @Select("select * from dish where category_id=#{id}")
-    List<DishVO> list(Long id);
+    List<Dish> list(Dish id);
 
     /**
      * 修改菜品
