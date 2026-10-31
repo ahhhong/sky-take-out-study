@@ -1,9 +1,7 @@
 package com.sky.mapper;
 
 import com.sky.result.Result;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import com.github.pagehelper.Page;
 import com.sky.annotation.AutoFill;

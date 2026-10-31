@@ -29,7 +29,7 @@ import com.sky.vo.DishVO;
 @Service 
 public class DishServiceImpl implements DishService{
 
-    @Autowired 
+    @Autowired
     private DishMapper dishMapper;
     @Autowired 
     private DishFlavorMapper dishFlavorMapper;
@@ -162,5 +162,18 @@ public class DishServiceImpl implements DishService{
         }
 
         return dishVOList;
+    }
+
+    /**'
+     * 启用与停用
+     * @param status
+     * @param id
+     */
+    public void startOrStop(Integer status, Long id) {
+        Dish dish = Dish.builder().id(id).status(status).build();
+        if (!status.equals(1)&&!status.equals(0)) {
+            throw  new DeletionNotAllowedException(MessageConstant.PARAMETER_ERROR);
+        }
+        dishMapper.update(dish);
     }
 }
