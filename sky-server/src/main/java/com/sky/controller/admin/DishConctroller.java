@@ -104,7 +104,6 @@ public class DishConctroller {
         return Result.success();
     }
 
-
     private void cleanCache(String pattern){
         Set keys = redisTemplate.keys(pattern);
         if (keys!=null&&!keys.isEmpty()){
